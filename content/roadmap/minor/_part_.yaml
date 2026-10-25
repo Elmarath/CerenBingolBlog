@@ -1,0 +1,7 @@
+# The minor clerkships (küçük stajlar), which are asked in the clinical test too.
+title: Minor Clerkships
+title_tr: Küçük Stajlar
+short: Minor clerkships           # used on the tabs
+emoji: 🧩
+position: 3                       # order on the roadmap
+description: "The smaller branches that also come up in the clinical test. Lots of little stops!"

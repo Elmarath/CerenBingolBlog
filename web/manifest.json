@@ -1,0 +1,35 @@
+{
+    "name": "Meowdical Notes",
+    "short_name": "Meowdical",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#FFF7F3",
+    "theme_color": "#E8668B",
+    "description": "Ceren Bingöl's cat-themed study diary on the road to TUS.",
+    "orientation": "any",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

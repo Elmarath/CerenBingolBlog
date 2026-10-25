@@ -1,0 +1,7 @@
+# The second test of TUS (Klinik Tıp Bilimleri Testi): the big branches.
+title: Clinical Medical Sciences
+title_tr: Klinik Tıp Bilimleri
+short: Clinical sciences          # used on the tabs
+emoji: 🩺
+position: 2                       # order on the roadmap
+description: "The second test of TUS, starting with the four big clinical branches."

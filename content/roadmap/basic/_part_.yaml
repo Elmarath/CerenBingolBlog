@@ -1,0 +1,7 @@
+# The first test of TUS (Temel Tıp Bilimleri Testi).
+title: Basic Medical Sciences
+title_tr: Temel Tıp Bilimleri
+short: Basic sciences             # used on the tabs
+emoji: 🧪
+position: 1                       # order on the roadmap
+description: "The first test of TUS: how the body is built, how it works, and what goes wrong."
