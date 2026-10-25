@@ -359,7 +359,7 @@ void _sync() {
 
 /// Writes every Markdown and YAML file under content/ into
 /// assets/generated/content.json, so the site fetches one file on startup
-/// instead of one per page. Release builds use it; run by tool/netlify_build.sh.
+/// instead of one per page. Release builds use it; the deploy workflow runs it.
 void _bundle() {
   final files = _contentFiles();
   File('assets/generated/content.json')

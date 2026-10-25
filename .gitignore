@@ -44,5 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Made by `dart run tool/content.dart bundle` during the Netlify build
+# Made by the deploy workflow (`dart run tool/content.dart bundle`)
 /assets/generated/content.json

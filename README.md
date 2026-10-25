@@ -137,12 +137,16 @@ test/               content rules and full-site rendering
 
 Packages: `go_router`, `flutter_markdown_plus`, `google_fonts`, `shared_preferences` (remembers the theme), `url_launcher`, `yaml`.
 
-## Deploy (Netlify)
+## Publish (GitHub Pages)
 
-`netlify.toml` builds the site with `tool/netlify_build.sh`: it downloads Flutter 3.29.3, runs `check`, bundles the content into one file for a faster start, and publishes `build/web`. Point a Netlify site at the repository and every push goes live. `web/_redirects` sends every address to the app, so links like `/roadmap/anatomy` work when opened directly.
+**Every push to `main` goes live.** `.github/workflows/deploy.yml` checks the content, runs the tests, bundles the content into one file for a faster start, builds the site with Flutter 3.29.3 and publishes it on GitHub Pages. If any step fails, nothing is published and the previous version stays online; the failure shows in the repository's **Actions** tab.
 
-By hand:
+- The site is at `https://<owner>.github.io/<repository>/`. Direct links such as `…/roadmap/anatomy` work too: Pages shows `404.html` for addresses that aren't files, and the build makes that page the app as well.
+- Your own domain: add it in the repository's **Settings → Pages → Custom domain**. The build picks up the new address by itself.
+- Pages is switched on once, in **Settings → Pages**, with **GitHub Actions** as the source.
+
+To see the release build on your computer first:
 
 ```bash
-dart run tool/content.dart bundle && flutter build web --release --pwa-strategy=none
+flutter run -d chrome --release
 ```

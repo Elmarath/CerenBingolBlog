@@ -13,7 +13,7 @@ Future<ContentRepository> loadContent(AssetBundle bundle) async =>
 /// Every Markdown and YAML file under `content/`, by path.
 ///
 /// Release builds read `assets/generated/content.json` (written by
-/// `dart run tool/content.dart bundle` during the Netlify build): one request
+/// `dart run tool/content.dart bundle` in the deploy workflow): one request
 /// on startup instead of one per file. Otherwise, and when it's missing, each
 /// file is read on its own, so local edits always show.
 Future<Map<String, String>> loadContentFiles(AssetBundle bundle) async =>

@@ -1,0 +1,75 @@
+# Builds the site and publishes it on GitHub Pages on every push to main.
+#
+# Pages has to be switched on once, in the repository's Settings → Pages, with
+# "GitHub Actions" as the source. The site is then at
+# https://<owner>.github.io/<repository>/, or at your own domain if you set one
+# there (the build adapts to either).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. A deploy that has started always finishes; newer
+# pushes wait, and only the latest of them goes out.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: subosito/flutter-action@v2
+        with:
+          # The Flutter release the site is developed and tested with.
+          flutter-version: 3.29.3
+          channel: stable
+          cache: true
+
+      - id: pages
+        uses: actions/configure-pages@v6
+
+      - run: flutter pub get
+
+      - name: Check the content
+        run: dart run tool/content.dart check
+
+      - name: Test
+        run: flutter test
+
+      - name: Bundle the content into one file, for a faster start
+        run: dart run tool/content.dart bundle
+
+      - name: Build
+        # base_path is "/<repository>" on github.io and empty on your own domain.
+        # No offline service worker: visitors always get the newest posts.
+        run: flutter build web --release --pwa-strategy=none --base-href "${{ steps.pages.outputs.base_path }}/"
+
+      - name: Let any address of the site open directly
+        # Pages can't send every address to the app the way a rewrite rule
+        # would. It shows 404.html for addresses that aren't files, so that
+        # page is the app too, and it opens the right page (/roadmap/anatomy).
+        run: cp build/web/index.html build/web/404.html
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
